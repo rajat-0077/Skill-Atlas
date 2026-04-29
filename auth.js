@@ -89,21 +89,30 @@ const SkillAtlasAuth = {
 
     async updateNavbar() {
         const navActions = document.querySelector('.nav-actions');
+        const navLinks = document.querySelector('.nav-links');
         if (!navActions) return;
 
         const user = await this.getCurrentUser();
         
+        // Handle Dashboard link visibility
+        if (navLinks) {
+            let dashboardLink = Array.from(navLinks.querySelectorAll('a')).find(a => a.textContent.trim() === 'Dashboard');
+            if (dashboardLink) {
+                dashboardLink.style.display = user ? 'block' : 'none';
+            }
+        }
+
         if (user) {
             // Logged in UI
             const name = user.name || 'Student';
             const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             navActions.innerHTML = `
                 <div class="profile-dropdown">
-                    <a href="profile.html" class="avatar-link">
-                        <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #6366f1); width: 40px; height: 40px; font-size: 1rem; color: white; display:flex; align-items:center; justify-content:center; border-radius: 50%; font-weight: 700;">${initials}</div>
+                    <a href="profile.html" class="avatar-link" title="My Profile">
+                        <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706); width: 40px; height: 40px; font-size: 0.9rem; color: white; display:flex; align-items:center; justify-content:center; border-radius: 50%; font-weight: 700; border: 2px solid rgba(255,255,255,0.1);">${initials}</div>
                     </a>
                 </div>
-                <button onclick="SkillAtlasAuth.logout()" class="btn btn-outline" style="padding: 0.5rem 1rem; margin-left: 0.5rem;">Log Out</button>
+                <button onclick="SkillAtlasAuth.logout()" class="btn btn-outline" style="padding: 0.5rem 1rem; margin-left: 1rem; border-color: rgba(255,255,255,0.2); color: #fff;">Log Out</button>
             `;
         } else {
             // Logged out UI
@@ -111,6 +120,11 @@ const SkillAtlasAuth = {
                 <a href="signin.html" class="btn btn-ghost">Sign In</a>
                 <a href="signup.html" class="btn btn-primary">Get Started</a>
             `;
+        }
+        
+        // Re-initialize Lucide icons if any were added
+        if (window.lucide) {
+            window.lucide.createIcons();
         }
     },
     

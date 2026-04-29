@@ -34,11 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
-            navbar.style.boxShadow = 'var(--shadow-sm)';
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+            navbar.style.background = 'rgba(15, 15, 15, 0.95)';
+            navbar.style.borderBottom = '1px solid rgba(255,255,255,0.06)';
         } else {
             navbar.style.boxShadow = 'none';
-            navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+            navbar.style.background = 'rgba(15, 15, 15, 0.85)';
+            navbar.style.borderBottom = '1px solid transparent';
         }
     });
 
