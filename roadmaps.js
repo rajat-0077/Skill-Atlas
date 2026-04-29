@@ -1,80 +1,76 @@
-const SkillAtlasRoadmaps = {
-    async fetchAll() {
-        const { data, error } = await _supabase
+document.addEventListener('DOMContentLoaded', async () => {
+    const roadmapsGrid = document.getElementById('roadmapsGrid');
+    const roadmapSearch = document.getElementById('roadmapSearch');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const noResults = document.getElementById('noResults');
+
+    let allRoadmaps = [];
+
+    async function fetchRoadmaps() {
+        if (typeof SkillAtlasAuth === 'undefined') return;
+
+        const { data, error } = await SkillAtlasAuth.client
             .from('roadmaps')
             .select('*')
-            .order('is_featured', { ascending: false });
-            
-        if (error) {
-            console.error('Error fetching roadmaps:', error);
-            return [];
-        }
-        return data;
-    },
+            .order('title');
 
-    renderGrid(roadmaps) {
-        const grid = document.getElementById('roadmapGrid');
-        if (!grid) return;
-        
-        if (roadmaps.length === 0) {
-            grid.innerHTML = '<div class="no-results">No roadmaps found matching your criteria.</div>';
+        if (error) {
+            roadmapsGrid.innerHTML = '<div class="error-msg">Error loading roadmaps. Please try again.</div>';
             return;
         }
 
-        grid.innerHTML = roadmaps.map(roadmap => `
-            <div class="roadmap-card" data-category="${roadmap.category}">
-                <div class="card-image bg-gradient-${Math.floor(Math.random() * 6) + 1}"></div>
-                <div class="card-content">
-                    <div class="card-meta">
-                        <span class="tag">${roadmap.category}</span>
-                        <span class="duration"><i data-lucide="clock" class="sm-icon"></i> ${roadmap.duration}</span>
-                    </div>
-                    <h3 class="card-title">${roadmap.title}</h3>
-                    <p class="card-desc">${roadmap.description}</p>
-                    <div class="card-details">
-                        <span class="difficulty difficulty-${roadmap.difficulty}">${roadmap.difficulty}</span>
-                    </div>
-                    <div class="card-footer-action">
-                        <a href="roadmap.html?id=${roadmap.slug}" class="btn btn-primary w-full">View Roadmap</a>
-                    </div>
+        allRoadmaps = data;
+        renderRoadmaps(allRoadmaps);
+    }
+
+    function renderRoadmaps(roadmaps) {
+        if (roadmaps.length === 0) {
+            roadmapsGrid.style.display = 'none';
+            noResults.style.display = 'block';
+            return;
+        }
+
+        roadmapsGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+
+        roadmapsGrid.innerHTML = roadmaps.map(roadmap => `
+            <div class="roadmap-card">
+                <div class="card-badge ${roadmap.difficulty}">${roadmap.difficulty}</div>
+                <h3 class="card-title">${roadmap.title}</h3>
+                <p class="card-desc">${roadmap.description}</p>
+                <div class="card-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> ${roadmap.duration}</span>
+                    <span><i data-lucide="tag" style="width:14px"></i> ${roadmap.category}</span>
                 </div>
+                <a href="roadmap.html?id=${roadmap.slug}" class="btn btn-primary w-full">View Roadmap</a>
             </div>
         `).join('');
         
         lucide.createIcons();
     }
-};
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const allRoadmaps = await SkillAtlasRoadmaps.fetchAll();
-    SkillAtlasRoadmaps.renderGrid(allRoadmaps);
+    function handleFilters() {
+        const query = roadmapSearch.value.toLowerCase();
+        const category = categoryFilter.value;
 
-    // Filter Logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const category = btn.dataset.category;
-            const filtered = category === 'all' 
-                ? allRoadmaps 
-                : allRoadmaps.filter(r => r.category === category);
-            
-            SkillAtlasRoadmaps.renderGrid(filtered);
+        const filtered = allRoadmaps.filter(r => {
+            const matchesSearch = r.title.toLowerCase().includes(query) || 
+                                r.description.toLowerCase().includes(query);
+            const matchesCategory = category === 'all' || r.category.toLowerCase() === category.toLowerCase();
+            return matchesSearch && matchesCategory;
         });
-    });
 
-    // Search Logic
-    const searchInput = document.getElementById('roadmapSearch');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = allRoadmaps.filter(r => 
-                r.title.toLowerCase().includes(term) || 
-                r.description.toLowerCase().includes(term)
-            );
-            SkillAtlasRoadmaps.renderGrid(filtered);
-        });
+        renderRoadmaps(filtered);
     }
+
+    window.resetFilters = () => {
+        roadmapSearch.value = '';
+        categoryFilter.value = 'all';
+        renderRoadmaps(allRoadmaps);
+    };
+
+    roadmapSearch.addEventListener('input', handleFilters);
+    categoryFilter.addEventListener('change', handleFilters);
+
+    await fetchRoadmaps();
 });
