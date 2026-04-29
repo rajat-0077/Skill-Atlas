@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathly — Free Visual Roadmaps for Skills & Exams</title>
+    <title>Skill Atlas — Free Visual Roadmaps for Skills & Exams</title>
     <meta name="description" content="Discover clear, community-driven visual roadmaps to help you master any tech skill, creative skill, or prepare for exams like JEE and UPSC for free.">
-    <meta name="description" content="Stop being confused. Start making progress. Find clear paths to any skill or exam with Pathly.">
+    <meta name="description" content="Stop being confused. Start making progress. Find clear paths to any skill or exam with Skill Atlas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,20 +14,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+    <!-- Navbar -->
     <header class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
                 <i data-lucide="map" class="logo-icon"></i>
-                Pathly
+                Skill Atlas
             </a>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i data-lucide="menu"></i>
             </button>
+
             <nav class="nav-links" id="navLinks">
                 <a href="roadmaps.html" class="nav-link">Roadmaps</a>
                 <a href="notes.html" class="nav-link">Notes</a>
                 <a href="community.html" class="nav-link">Community</a>
                 <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
                 <div class="nav-actions">
                     <a href="signin.html" class="btn btn-ghost">Sign In</a>
                     <a href="signup.html" class="btn btn-primary">Get Started</a>
@@ -35,12 +39,15 @@
             </nav>
         </div>
     </header>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-container">
             <div class="hero-content">
                 <span class="hero-badge">New: AI Learning Paths 🚀</span>
                 <h1 class="hero-title">Stop being confused.<br><span class="text-gradient">Start making progress.</span></h1>
                 <p class="hero-subtitle">Your clear path to any skill or exam. Discover curated roadmaps built by experts.</p>
+                
                 <div class="search-container">
                     <div class="search-box">
                         <i data-lucide="search" class="search-icon"></i>
@@ -49,40 +56,646 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Decorative background elements -->
             <div class="blob blob-1"></div>
             <div class="blob blob-2"></div>
         </div>
     </section>
+
+    <!-- Categories Section -->
     <section class="categories">
         <div class="container">
             <h2 class="section-title">Explore Categories</h2>
+            <p class="section-subtitle">Find your path from our diverse range of subjects</p>
+            
             <div class="category-grid">
-                <a href="#" class="category-card"><div class="icon-wrapper bg-blue"><i data-lucide="laptop"></i></div><h3>Tech Skills</h3></a>
-                <a href="#" class="category-card"><div class="icon-wrapper bg-green"><i data-lucide="book"></i></div><h3>Exam Prep</h3></a>
-                <a href="#" class="category-card"><div class="icon-wrapper bg-pink"><i data-lucide="paintbrush"></i></div><h3>Creative Skills</h3></a>
-                <a href="#" class="category-card"><div class="icon-wrapper bg-orange"><i data-lucide="briefcase"></i></div><h3>Career & Jobs</h3></a>
-                <a href="#" class="category-card"><div class="icon-wrapper bg-purple"><i data-lucide="line-chart"></i></div><h3>Business & Money</h3></a>
-                <a href="#" class="category-card"><div class="icon-wrapper bg-red"><i data-lucide="video"></i></div><h3>Creator Economy</h3></a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-blue">
+                        <i data-lucide="laptop"></i>
+                    </div>
+                    <h3>Tech Skills</h3>
+                    <p>Programming, Data, Design</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-green">
+                        <i data-lucide="book"></i>
+                    </div>
+                    <h3>Exam Prep</h3>
+                    <p>SAT, GRE, Certifications</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-pink">
+                        <i data-lucide="paintbrush"></i>
+                    </div>
+                    <h3>Creative Skills</h3>
+                    <p>Art, Music, Writing</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-orange">
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <h3>Career & Jobs</h3>
+                    <p>Interviews, Resumes</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-purple">
+                        <i data-lucide="line-chart"></i>
+                    </div>
+                    <h3>Business & Money</h3>
+                    <p>Marketing, Finance</p>
+                </a>
+                <a href="#" class="category-card">
+                    <div class="icon-wrapper bg-red">
+                        <i data-lucide="video"></i>
+                    </div>
+                    <h3>Creator Economy</h3>
+                    <p>YouTube, Podcasting</p>
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- Roadmap Preview Section -->
+    <section class="roadmap-preview" id="roadmapPreview">
+        <style>
+            .roadmap-preview {
+                background: #0f0f0f;
+                padding: 8rem 0;
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Ambient glow blobs */
+            .rp-blob {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(120px);
+                opacity: 0.25;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .rp-blob-1 { width: 500px; height: 500px; background: #3b82f6; top: -150px; left: -100px; }
+            .rp-blob-2 { width: 400px; height: 400px; background: #8b5cf6; bottom: -100px; right: -50px; }
+            .rp-blob-3 { width: 300px; height: 300px; background: #10b981; top: 50%; left: 60%; transform: translate(-50%, -50%); }
+
+            .rp-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 5rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .rp-text {
+                flex: 1;
+                min-width: 280px;
+            }
+
+            .rp-badge {
+                display: inline-block;
+                padding: 6px 14px;
+                border-radius: 99px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                background: rgba(59, 130, 246, 0.15);
+                color: #60a5fa;
+                border: 1px solid rgba(59, 130, 246, 0.3);
+                margin-bottom: 1.5rem;
+            }
+
+            .rp-headline {
+                font-size: 3.5rem;
+                font-weight: 800;
+                color: #ffffff;
+                line-height: 1.1;
+                letter-spacing: -0.03em;
+                margin-bottom: 1.5rem;
+            }
+
+            .rp-headline .rp-gradient {
+                background: linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .rp-subtext {
+                font-size: 1.2rem;
+                color: #a1a1aa;
+                line-height: 1.7;
+                margin-bottom: 2.5rem;
+                max-width: 420px;
+            }
+
+            .rp-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 16px 32px;
+                background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+                color: #fff;
+                border: none;
+                border-radius: 14px;
+                font-size: 1.1rem;
+                font-weight: 700;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
+            }
+
+            .rp-cta:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
+            }
+
+            /* Mini Roadmap Canvas */
+            .rp-canvas {
+                flex: 1;
+                min-width: 340px;
+                max-width: 420px;
+                position: relative;
+                height: 520px;
+            }
+
+            .rp-trail-svg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            #rpTrailActive {
+                transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.6));
+            }
+
+            .rp-node {
+                position: absolute;
+                width: 200px;
+                background: rgba(25, 25, 25, 0.7);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 14px;
+                padding: 16px 18px;
+                z-index: 10;
+                opacity: 0.4;
+                filter: grayscale(0.6);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            .rp-node.lit {
+                opacity: 1;
+                filter: grayscale(0);
+                border-color: var(--accent);
+                box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.2), 0 8px 32px rgba(0,0,0,0.4);
+            }
+
+            .rp-node.lit .rp-node-num {
+                background: var(--accent);
+                color: #fff;
+            }
+
+            .rp-node-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .rp-node-num {
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: #a1a1aa;
+                background: rgba(255,255,255,0.08);
+                padding: 3px 10px;
+                border-radius: 8px;
+                transition: all 0.4s;
+            }
+
+            .rp-node-icon {
+                width: 28px;
+                height: 28px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(var(--accent-rgb), 0.15);
+                color: var(--accent);
+            }
+
+            .rp-node-icon i, .rp-node-icon svg {
+                width: 14px;
+                height: 14px;
+            }
+
+            .rp-node-title {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #fff;
+                margin: 0;
+            }
+
+            .rp-node-meta {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.72rem;
+                color: #71717a;
+                margin-top: 8px;
+            }
+
+            /* Zigzag positions */
+            .rp-node:nth-of-type(1) { top: 0;    left: 10px; }
+            .rp-node:nth-of-type(2) { top: 100px; left: 140px; }
+            .rp-node:nth-of-type(3) { top: 200px; left: 30px; }
+            .rp-node:nth-of-type(4) { top: 300px; left: 160px; }
+            .rp-node:nth-of-type(5) { top: 400px; left: 60px; }
+
+            /* Pulse ring on current node */
+            .rp-node.current::after {
+                content: '';
+                position: absolute;
+                top: -4px;
+                left: -4px;
+                right: -4px;
+                bottom: -4px;
+                border-radius: 18px;
+                border: 2px solid var(--accent);
+                animation: rpPulse 1.8s ease-out infinite;
+            }
+
+            @keyframes rpPulse {
+                0% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0; transform: scale(1.08); }
+            }
+
+            /* Stats row */
+            .rp-stats {
+                display: flex;
+                gap: 3rem;
+                margin-top: 3rem;
+            }
+
+            .rp-stat-val {
+                font-size: 2rem;
+                font-weight: 800;
+                color: #fff;
+                display: block;
+                line-height: 1;
+            }
+
+            .rp-stat-label {
+                font-size: 0.85rem;
+                color: #71717a;
+                margin-top: 4px;
+                display: block;
+            }
+
+            /* Responsive */
+            @media (max-width: 900px) {
+                .rp-container {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .rp-subtext { margin-left: auto; margin-right: auto; }
+                .rp-stats { justify-content: center; }
+                .rp-headline { font-size: 2.5rem; }
+                .rp-canvas { min-width: unset; width: 100%; max-width: 380px; }
+            }
+        </style>
+
+        <div class="rp-blob rp-blob-1"></div>
+        <div class="rp-blob rp-blob-2"></div>
+        <div class="rp-blob rp-blob-3"></div>
+
+        <div class="rp-container">
+            <div class="rp-text">
+                <span class="rp-badge">✨ Interactive Roadmaps</span>
+                <h2 class="rp-headline">Your path.<br><span class="rp-gradient">Crystal clear.</span></h2>
+                <p class="rp-subtext">No more confusion. Just follow the glowing trail — one node at a time. Every step is mapped out, every resource curated, every milestone tracked.</p>
+                <a href="roadmaps.html" class="rp-cta">Start Your Roadmap →</a>
+
+                <div class="rp-stats">
+                    <div>
+                        <span class="rp-stat-val">50+</span>
+                        <span class="rp-stat-label">Roadmaps</span>
+                    </div>
+                    <div>
+                        <span class="rp-stat-val">10K+</span>
+                        <span class="rp-stat-label">Learners</span>
+                    </div>
+                    <div>
+                        <span class="rp-stat-val">100%</span>
+                        <span class="rp-stat-label">Free</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rp-canvas" id="rpCanvas">
+                <svg class="rp-trail-svg" id="rpTrailSvg" viewBox="0 0 420 520" preserveAspectRatio="xMidYMid meet">
+                    <path id="rpTrailBg" d="" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-dasharray="10 8" fill="none" stroke-linecap="round"/>
+                    <path id="rpTrailActive" d="" stroke="url(#rpGrad)" stroke-width="3" stroke-dasharray="10 8" fill="none" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="rpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#3b82f6"/>
+                            <stop offset="50%" stop-color="#8b5cf6"/>
+                            <stop offset="100%" stop-color="#10b981"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <div class="rp-node" style="--accent: #3b82f6; --accent-rgb: 59,130,246;">
+                    <div class="rp-node-top">
+                        <span class="rp-node-num">⚡ 01</span>
+                        <div class="rp-node-icon"><i data-lucide="brain-circuit"></i></div>
+                    </div>
+                    <h4 class="rp-node-title">Design Thinking</h4>
+                    <div class="rp-node-meta"><span>⏱ 4 hrs</span><span>📚 Free</span></div>
+                </div>
+                <div class="rp-node" style="--accent: #3b82f6; --accent-rgb: 59,130,246;">
+                    <div class="rp-node-top">
+                        <span class="rp-node-num">⚡ 02</span>
+                        <div class="rp-node-icon"><i data-lucide="palette"></i></div>
+                    </div>
+                    <h4 class="rp-node-title">Visual Design</h4>
+                    <div class="rp-node-meta"><span>⏱ 6 hrs</span><span>📚 Free</span></div>
+                </div>
+                <div class="rp-node" style="--accent: #8b5cf6; --accent-rgb: 139,92,246;">
+                    <div class="rp-node-top">
+                        <span class="rp-node-num">⚡ 03</span>
+                        <div class="rp-node-icon"><i data-lucide="layout-template"></i></div>
+                    </div>
+                    <h4 class="rp-node-title">Wireframing</h4>
+                    <div class="rp-node-meta"><span>⏱ 5 hrs</span><span>📚 Free</span></div>
+                </div>
+                <div class="rp-node" style="--accent: #8b5cf6; --accent-rgb: 139,92,246;">
+                    <div class="rp-node-top">
+                        <span class="rp-node-num">⚡ 04</span>
+                        <div class="rp-node-icon"><i data-lucide="mouse-pointer-click"></i></div>
+                    </div>
+                    <h4 class="rp-node-title">Prototyping</h4>
+                    <div class="rp-node-meta"><span>⏱ 6 hrs</span><span>📚 Free</span></div>
+                </div>
+                <div class="rp-node" style="--accent: #10b981; --accent-rgb: 16,185,129;">
+                    <div class="rp-node-top">
+                        <span class="rp-node-num">⚡ 05</span>
+                        <div class="rp-node-icon"><i data-lucide="briefcase"></i></div>
+                    </div>
+                    <h4 class="rp-node-title">Get Your First Gig</h4>
+                    <div class="rp-node-meta"><span>⏱ Ongoing</span><span>📚 Free</span></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        (function() {
+            // Draw SVG path through node centers
+            const nodePositions = [
+                { x: 110, y: 40 },
+                { x: 240, y: 140 },
+                { x: 130, y: 240 },
+                { x: 260, y: 340 },
+                { x: 160, y: 440 }
+            ];
+
+            let d = `M ${nodePositions[0].x} ${nodePositions[0].y}`;
+            for (let i = 1; i < nodePositions.length; i++) {
+                const prev = nodePositions[i - 1];
+                const curr = nodePositions[i];
+                const cpY = prev.y + (curr.y - prev.y) / 2;
+                d += ` C ${prev.x} ${cpY}, ${curr.x} ${cpY}, ${curr.x} ${curr.y}`;
+            }
+
+            document.getElementById('rpTrailBg').setAttribute('d', d);
+            document.getElementById('rpTrailActive').setAttribute('d', d);
+
+            const activePath = document.getElementById('rpTrailActive');
+            const pathLen = activePath.getTotalLength();
+            activePath.style.strokeDasharray = pathLen;
+            activePath.style.strokeDashoffset = pathLen;
+
+            const rpNodes = document.querySelectorAll('.rp-node');
+            let litCount = 0;
+
+            function lightUpNext() {
+                if (litCount >= rpNodes.length) {
+                    // Reset after a pause
+                    setTimeout(() => {
+                        rpNodes.forEach(n => { n.classList.remove('lit', 'current'); });
+                        activePath.style.strokeDashoffset = pathLen;
+                        litCount = 0;
+                        setTimeout(lightUpNext, 800);
+                    }, 2500);
+                    return;
+                }
+
+                rpNodes.forEach(n => n.classList.remove('current'));
+
+                rpNodes[litCount].classList.add('lit', 'current');
+
+                // Update trail
+                const fraction = (litCount + 1) / rpNodes.length;
+                activePath.style.strokeDashoffset = pathLen - (pathLen * fraction);
+
+                litCount++;
+                setTimeout(lightUpNext, 1500);
+            }
+
+            // Start the animation when section is visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(lightUpNext, 500);
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(document.getElementById('roadmapPreview'));
+        })();
+        </script>
+    </section>
+
+    <!-- Popular Roadmaps -->
+    <section class="popular-roadmaps bg-light">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Most Popular Roadmaps</h2>
+                    <p class="section-subtitle">Start your journey with our top-rated guides</p>
+                </div>
+                <a href="roadmaps.html" class="btn btn-outline d-none-mobile">View All</a>
+            </div>
+
+            <div class="roadmap-grid">
+                <!-- Card 1 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-1"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag">Tech Skills</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 6 months</span>
+                        </div>
+                        <h3 class="card-title">Full-Stack Web Development</h3>
+                        <p class="card-desc">Master frontend and backend technologies to build complete web applications.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">JS</div>
+                                <span>John Smith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-2"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag tag-green">Exam Prep</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 3 months</span>
+                        </div>
+                        <h3 class="card-title">AWS Solutions Architect</h3>
+                        <p class="card-desc">A complete guide to passing the AWS Certified Solutions Architect Associate exam.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">AD</div>
+                                <span>Alice Doe</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-3"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag tag-pink">Creative</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 4 months</span>
+                        </div>
+                        <h3 class="card-title">UI/UX Design Masterclass</h3>
+                        <p class="card-desc">Learn Figma, user research, and design systems from scratch.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">EJ</div>
+                                <span>Emma Jones</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-4"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag tag-purple">Business</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 2 months</span>
+                        </div>
+                        <h3 class="card-title">Digital Marketing Analytics</h3>
+                        <p class="card-desc">Understand SEO, PPC, and Google Analytics to drive business growth.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">MR</div>
+                                <span>Mike Ross</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-5"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag tag-red">Creator</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 1 month</span>
+                        </div>
+                        <h3 class="card-title">Launch Your Podcast</h3>
+                        <p class="card-desc">Equipment, editing, hosting, and marketing strategies for your first podcast.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">SL</div>
+                                <span>Sarah Lee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="roadmap-card">
+                    <div class="card-image bg-gradient-6"></div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="tag tag-orange">Career</span>
+                            <span class="duration"><i data-lucide="clock" class="sm-icon"></i> 2 weeks</span>
+                        </div>
+                        <h3 class="card-title">Tech Interview Prep</h3>
+                        <p class="card-desc">Data structures, algorithms, and system design for FAANG interviews.</p>
+                        <div class="card-footer">
+                            <div class="author">
+                                <div class="avatar bg-gray">DK</div>
+                                <span>David Kim</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8 d-block-mobile d-none-desktop">
+                 <a href="roadmaps.html" class="btn btn-outline w-full">View All Roadmaps</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container cta-container">
+            <h2 class="cta-title">Ready to find your path?</h2>
+            <p class="cta-subtitle">Join thousands of learners making consistent progress every day.</p>
+            <a href="#" class="btn btn-primary btn-lg">Create Free Account</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo"><i data-lucide="map" class="logo-icon"></i>Pathly</a>
+                    <a href="index.html" class="logo">
+                        <i data-lucide="map" class="logo-icon"></i>
+                        Skill Atlas
+                    </a>
                     <p>Your clear path to any skill or exam.</p>
                 </div>
                 <div class="footer-links">
-                    <a href="about.html">About</a>
-                    <a href="contribute.html">Contribute</a>
-                    <a href="https://github.com/rajat-0077/Skill-Atlas" target="_blank">GitHub</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">Contribute on GitHub</a>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Skill Atlas. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
     <script src="auth.js"></script>
     <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
