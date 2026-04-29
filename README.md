@@ -1,37 +1,32 @@
-# Skill Atlas 🚀
+# Skill Atlas 🗺️
 
-Welcome to **Skill Atlas**, the ultimate community-driven learning platform. Skill Atlas provides clear, visual roadmaps to help you navigate through tech skills, competitive exams, creative arts, and much more.
+**Skill Atlas** is a free, interactive platform for visual learning roadmaps. Master any skill—from Web Development and UI/UX Design to Exam Preparation (JEE, UPSC)—with curated, community-driven paths.
 
-## ✨ Features
+## 🚀 Features
 
-- **Visual Roadmaps**: Step-by-step guides for various learning paths.
-- **Progress Tracking**: Save your progress as you learn (Supabase integrated).
-- **Community Discussions**: Connect with other learners, ask questions, and share insights.
-- **Resource Sharing**: Upload and download high-quality study notes.
-- **Personal Dashboard**: A command center for your learning journey.
-- **User Authentication**: Secure sign-in with Email or Google (Supabase Auth).
+- **Interactive Roadmaps:** Follow a glowing trail of progress.
+- **Supabase Integration:** Secure authentication (Email & Google) and persistent progress tracking.
+- **Dynamic Content:** Browse roadmaps fetched directly from the database.
+- **Modern UI:** Premium dark theme with sleek animations and responsive design.
+- **Personal Dashboard:** Track your streaks, completed nodes, and active goals.
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, Vanilla CSS3, JavaScript (ES6+)
-- **Backend**: Supabase (PostgreSQL, Auth)
-- **Icons**: Lucide Icons
-- **Deployment**: Optimized for Vercel
+- **Frontend:** Vanilla HTML5, CSS3, JavaScript.
+- **Backend:** Supabase (Auth & Database).
+- **Icons:** Lucide Icons.
+- **Fonts:** Inter & Plus Jakarta Sans.
 
-## 🚀 Getting Started
+## 📦 Deployment
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/rajat-0077/Skill-Atlas.git
-    ```
-2.  **Open locally**: Simply open `index.html` in your browser or use a live server.
-3.  **Deployment**: Push your changes and deploy to Vercel with one click.
+This project is optimized for **Vercel**. 
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frajat-0077%2FSkill-Atlas)
 
-## 🤝 Contributing
-
-Contributions are welcome! If you have a roadmap to share or a feature to suggest, please open an issue or a pull request.
+1. Connect your GitHub repository to Vercel.
+2. Vercel will automatically detect the static configuration.
+3. Your site will be live with clean URLs (e.g., `/dashboard` instead of `/dashboard.html`).
 
 ---
-Built with ❤️ by the Skill Atlas Community.
+
+Built with ❤️ by the Pathly Team.
