@@ -1,0 +1,22 @@
+:root {
+    --primary: #8b5cf6;
+    --primary-dark: #7c3aed;
+    --secondary: #f59e0b;
+    --bg: #0f0f0f;
+    --text: #ffffff;
+    --text-muted: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.1);
+}
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.navbar { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-link:hover, .nav-link.active { color: var(--text); }
+.btn { padding: 0.6rem 1.2rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; text-decoration: none; border: none; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: white; }
+.hero { padding: 8rem 0; text-align: center; }
+.text-gradient { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
