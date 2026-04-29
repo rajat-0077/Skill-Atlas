@@ -1,61 +1,83 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const roadmapId = urlParams.get('id') || 'uiux-design';
-    
+    // Elements
     const nodes = document.querySelectorAll('.node-card');
+    // ... other elements ...
     const sidePanel = document.getElementById('sidePanel');
     const panelOverlay = document.getElementById('panelOverlay');
     const closeBtn = document.getElementById('closePanelBtn');
-    const markCompleteBtn = document.getElementById('markCompleteBtn');
-    
     const panelTitle = document.getElementById('panelTitle');
     const panelTime = document.getElementById('panelTime');
     const panelDesc = document.getElementById('panelDesc');
+    const markCompleteBtn = document.getElementById('markCompleteBtn');
     const progressStats = document.getElementById('progressStats');
     const topProgressFill = document.getElementById('topProgressFill');
+    const celebrationModal = document.getElementById('celebrationModal');
+    const trailSvg = document.getElementById('trailSvg');
     const trailPathBg = document.getElementById('trailPathBg');
     const trailPathActive = document.getElementById('trailPathActive');
-    const celebrationModal = document.getElementById('celebrationModal');
+    const roadmapContainer = document.getElementById('roadmapContainer');
 
-    let currentNodeId = null;
-    let completedNodes = new Set();
-    const totalNodes = nodes.length;
-
-    // Load saved progress
-    if (typeof SkillAtlasAuth !== 'undefined') {
-        const savedProgress = await SkillAtlasAuth.getUserProgress(roadmapId);
-        if (savedProgress) {
-            completedNodes = new Set(savedProgress);
+    // URL Parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const roadmapSlug = urlParams.get('id') || 'uiux-design';
+    
+    // Fetch roadmap metadata for SEO and Title
+    async function initRoadmapHeader() {
+        const { data: roadmap, error } = await _supabase
+            .from('roadmaps')
+            .select('*')
+            .eq('slug', roadmapSlug)
+            .single();
+            
+        if (!error && roadmap) {
+            document.title = `${roadmap.title} | Skill Atlas`;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', roadmap.description);
+            
+            const headerTitle = document.querySelector('.roadmap-title');
+            if (headerTitle) {
+                headerTitle.innerHTML = `<a href="roadmaps.html" class="back-btn"><i data-lucide="arrow-left"></i></a> ${roadmap.title}`;
+                lucide.createIcons();
+            }
         }
     }
+    
+    initRoadmapHeader();
 
-    function getElementCenter(el) {
-        const rect = el.getBoundingClientRect();
-        const containerRect = document.getElementById('roadmapContainer').getBoundingClientRect();
-        return {
-            x: rect.left + rect.width / 2 - containerRect.left,
-            y: rect.top + rect.height / 2 - containerRect.top
-        };
+    // State
+    const roadmapId = roadmapSlug;
+    const totalNodes = nodes.length;
+    let completedNodes = new Set();
+    if (typeof SkillAtlasAuth !== 'undefined') {
+        completedNodes = await SkillAtlasAuth.getUserProgress(roadmapId);
     }
+    let currentNodeId = null;
 
+    // Functions
     function drawTrail() {
-        if (nodes.length < 2) return;
-        let d = '';
-        nodes.forEach((node, index) => {
-            const center = getElementCenter(node);
-            if (index === 0) d += `M ${center.x} ${center.y}`;
-            else {
-                const prevCenter = getElementCenter(nodes[index - 1]);
-                const cp1x = prevCenter.x;
-                const cp1y = prevCenter.y + (center.y - prevCenter.y) / 2;
-                const cp2x = center.x;
-                const cp2y = prevCenter.y + (center.y - prevCenter.y) / 2;
-                d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${center.x} ${center.y}`;
-            }
+        if (nodes.length === 0) return;
+        requestAnimationFrame(() => {
+            const svgRect = trailSvg.parentElement.getBoundingClientRect();
+            let pathString = '';
+            nodes.forEach((node, index) => {
+                const rect = node.getBoundingClientRect();
+                const x = (rect.left - svgRect.left) + rect.width / 2;
+                const y = (rect.top - svgRect.top) + rect.height / 2;
+                if (index === 0) pathString += `M ${x} ${y} `;
+                else {
+                    const prevNode = nodes[index-1];
+                    const prevRect = prevNode.getBoundingClientRect();
+                    const prevX = (prevRect.left - svgRect.left) + prevRect.width / 2;
+                    const prevY = (prevRect.top - svgRect.top) + prevRect.height / 2;
+                    const cp1X = prevX; const cp1Y = prevY + (y - prevY) / 2;
+                    const cp2X = x; const cp2Y = prevY + (y - prevY) / 2;
+                    pathString += `C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${x} ${y} `;
+                }
+            });
+            trailPathBg.setAttribute('d', pathString);
+            trailPathActive.setAttribute('d', pathString);
+            updateTrailProgress();
         });
-        trailPathBg.setAttribute('d', d);
-        trailPathActive.setAttribute('d', d);
-        updateTrailProgress();
     }
 
     function updateTrailProgress() {
