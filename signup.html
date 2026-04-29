@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In | Skill Atlas</title>
-    <meta name="description" content="Sign in to your Skill Atlas account to access your learning roadmaps and track your progress.">
+    <title>Sign Up | Skill Atlas</title>
+    <meta name="description" content="Create your free Skill Atlas account to track your roadmap progress and join the community.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,10 +21,14 @@
         </a>
         
         <div class="auth-card">
-            <h1 class="auth-title">Welcome Back</h1>
-            <p class="auth-subtitle">Sign in to continue your learning journey.</p>
+            <h1 class="auth-title">Create an Account</h1>
+            <p class="auth-subtitle">Join Skill Atlas and start your journey today.</p>
             
-            <form id="signinForm" class="auth-form">
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="John Doe">
+                </div>
                 
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -32,16 +36,23 @@
                 </div>
                 
                 <div class="form-group">
-                    <div style="display: flex; justify-content: space-between;">
-                        <label for="password">Password</label>
-                        <a href="#" class="forgot-link">Forgot password?</a>
-                    </div>
+                    <label for="password">Password</label>
                     <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">I am a...</label>
+                    <select id="role" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="student">Student</option>
+                        <option value="professional">Working Professional</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
                 
                 <div id="authError" class="auth-error" style="display: none;"></div>
                 
-                <button type="submit" class="btn btn-primary w-full btn-lg mt-4">Sign In</button>
+                <button type="submit" class="btn btn-primary w-full btn-lg mt-4">Sign Up</button>
                 
                 <div style="margin: 1.5rem 0; text-align: center; color: #a1a1aa; position: relative;">
                     <span style="background: #fff; padding: 0 10px; position: relative; z-index: 1;">Or continue with</span>
@@ -54,7 +65,7 @@
                 </button>
             </form>
             
-            <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+            <p class="auth-switch">Already have an account? <a href="signin.html">Sign In</a></p>
         </div>
     </div>
 
@@ -62,22 +73,26 @@
     <script>
         lucide.createIcons();
         
-        document.getElementById('signinForm').addEventListener('submit', async (e) => {
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
             
             const submitBtn = e.target.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Signing in...';
+            submitBtn.textContent = 'Creating account...';
             
-            const result = await SkillAtlasAuth.login(email, password);
+            const result = await SkillAtlasAuth.register(name, email, password, role);
             
             if (result.success) {
-                window.location.href = 'dashboard.html';
+                // For new signups, Supabase might require email verification depending on settings.
+                // But typically it signs them in immediately if auto-confirm is on.
+                window.location.href = 'onboarding.html';
             } else {
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Sign In';
+                submitBtn.textContent = 'Sign Up';
                 const errorEl = document.getElementById('authError');
                 errorEl.textContent = result.message;
                 errorEl.style.display = 'block';

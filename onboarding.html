@@ -3,25 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Pathly 🚀</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Welcome to Skill Atlas — Onboarding</title>
     <link rel="stylesheet" href="onboarding.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="onboarding-page">
-    <div id="onboardingContainer" class="onboarding-container">
+    <div class="onboarding-container">
+        <!-- Step 1: Welcome -->
         <div class="onboarding-step active" id="step1">
             <div class="step-content text-center">
                 <div class="welcome-icon">🎉</div>
-                <h1 class="step-title">Welcome to Pathly</h1>
-                <p class="step-subtitle">Let's set up your profile in under 2 minutes</p>
-                <button class="btn btn-primary btn-lg mt-8" onclick="nextStep(2)">Let's Go →</button>
+                <h1 class="step-title">Welcome to Skill Atlas</h1>
+                <p class="step-subtitle">Let's set up your profile in under 2 minutes. We'll help you find the perfect learning path.</p>
+                
+                <div class="progress-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <button class="btn btn-primary btn-lg mt-8 next-btn" onclick="nextStep(2)">Let's Go →</button>
             </div>
         </div>
+
+        <!-- Step 2: Persona -->
+        <div class="onboarding-step" id="step2">
+            <div class="step-content">
+                <h1 class="step-title">Tell us about yourself</h1>
+                <p class="step-subtitle">This helps us recommend the right difficulty and resources.</p>
+                
+                <div class="option-cards">
+                    <div class="option-card" onclick="selectRole(this, 'school')">
+                        <div class="option-icon">🎓</div>
+                        <div class="option-text">School Student</div>
+                    </div>
+                    <div class="option-card" onclick="selectRole(this, 'college')">
+                        <div class="option-icon">📚</div>
+                        <div class="option-text">College Student</div>
+                    </div>
+                    <div class="option-card" onclick="selectRole(this, 'aspirant')">
+                        <div class="option-icon">🎯</div>
+                        <div class="option-text">Exam Aspirant</div>
+                    </div>
+                    <div class="option-card" onclick="selectRole(this, 'pro')">
+                        <div class="option-icon">💼</div>
+                        <div class="option-text">Working Professional</div>
+                    </div>
+                </div>
+
+                <div class="progress-dots">
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="step-footer">
+                    <button class="btn btn-primary btn-lg next-btn" id="personaNext" disabled onclick="nextStep(3)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Goals -->
+        <div class="onboarding-step" id="step3">
+            <div class="step-content">
+                <h1 class="step-title">What's your goal?</h1>
+                <p class="step-subtitle">Pick as many as you like. We'll tailor your dashboard.</p>
+                
+                <div class="pill-options">
+                    <div class="pill-option" onclick="toggleGoal(this, 'job')">Get a Job</div>
+                    <div class="pill-option" onclick="toggleGoal(this, 'skill')">Learn a Skill</div>
+                    <div class="pill-option" onclick="toggleGoal(this, 'exam')">Crack an Exam</div>
+                    <div class="pill-option" onclick="toggleGoal(this, 'startup')">Build a Startup</div>
+                    <div class="pill-option" onclick="toggleGoal(this, 'freelance')">Start Freelancing</div>
+                    <div class="pill-option" onclick="toggleGoal(this, 'explore')">Just Exploring</div>
+                </div>
+
+                <div class="progress-dots">
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="step-footer">
+                    <button class="btn btn-primary btn-lg next-btn" id="goalNext" disabled onclick="nextStep(4)">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Roadmap Selection -->
+        <div class="onboarding-step" id="step4">
+            <div class="step-content">
+                <h1 class="step-title">Pick your first roadmap</h1>
+                <p class="step-subtitle">Don't worry, you can always change this later.</p>
+                
+                <div class="roadmap-recommendations" id="roadmapContainer">
+                    <!-- Recommended roadmaps injected here -->
+                </div>
+
+                <div class="progress-dots">
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                    <div class="dot active"></div>
+                </div>
+
+                <div class="step-footer">
+                    <button class="btn btn-primary btn-lg next-btn" id="finishBtn" disabled onclick="completeOnboarding()">Finish Setup →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Success -->
+        <div class="onboarding-step" id="stepComplete">
+            <div class="step-content text-center">
+                <div class="success-icon">🚀</div>
+                <h1 class="step-title" id="completionTitle">You're all set!</h1>
+                <p class="step-subtitle">Redirecting you to your personalized dashboard...</p>
+            </div>
+        </div>
+
+        <div class="onboarding-skip">
+            <a href="dashboard.html" class="skip-link">Skip setup for now</a>
+        </div>
     </div>
+
     <script src="auth.js"></script>
     <script src="onboarding.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

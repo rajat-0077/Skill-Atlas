@@ -3,12 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Pathly</title>
+    <title>About | Skill Atlas</title>
+    <meta name="description" content="Learn more about Skill Atlas and our mission to provide free, high-quality learning paths for everyone.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
-    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a></div></header>
-    <main class="container py-8"><h1>About Pathly</h1><p>Pathly is a community-driven platform for visual learning roadmaps.</p></main>
+<body class="bg-light">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions">
+                    <!-- Populated by auth.js -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content pt-navbar container" style="padding-top: 4rem; padding-bottom: 6rem;">
+        
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <h1 class="page-title" style="margin-bottom: 1rem;">Our Mission</h1>
+            <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;">We believe that high-quality education should be free and accessible to everyone. Skill Atlas provides clear, structured paths to master any skill or prepare for any exam without the noise.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-bottom: 5rem;">
+            <div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">Why Skill Atlas?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+                    The internet is full of great resources, but finding the right order to learn things is often the hardest part. Students spend more time searching for what to learn next than actually learning.
+                </p>
+                <p style="color: var(--text-muted); line-height: 1.6;">
+                    Skill Atlas solves this by providing visual, step-by-step roadmaps curated by experts and the community. We point you to the best free tutorials, documentation, and practice problems at each step.
+                </p>
+            </div>
+            <div>
+                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">The "Open" Philosophy</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+                    Everything on Skill Atlas is open-source and community-driven. Our roadmaps are living documents that evolve as technology and exam patterns change.
+                </p>
+                <p style="color: var(--text-muted); line-height: 1.6;">
+                    If you see something that can be improved, you can contribute. If you know a better resource for a specific topic, you can suggest it. We are stronger together.
+                </p>
+            </div>
+        </div>
+
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: 2rem; padding: 4rem 2rem; text-align: center;">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Help Us Grow</h2>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; font-size: 1.125rem;">
+                Are you an expert in a field? We are always looking for new roadmaps to add to our collection. Help the next generation of learners.
+            </p>
+            <a href="contribute.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">
+                Contribute a Roadmap
+            </a>
+        </div>
+
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

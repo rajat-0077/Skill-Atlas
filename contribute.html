@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute | Skill Atlas</title>
+    <meta name="description" content="Help improve Skill Atlas by suggesting new roadmaps or submitting better resources for existing skills and exams.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions">
+                    <!-- Populated by auth.js -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content pt-navbar container" style="max-width: 800px; padding-top: 4rem; padding-bottom: 6rem;">
+        
+        <div style="margin-bottom: 3rem;">
+            <h1 class="page-title" style="margin-bottom: 0.5rem; text-align: left;">Contribute to Skill Atlas</h1>
+            <p class="section-subtitle" style="text-align: left; margin: 0; max-width: none;">Skill Atlas relies on community experts to keep our roadmaps accurate and up-to-date. Here is how you can help.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+            
+            <!-- Suggest a Roadmap -->
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 1.5rem; padding: 2.5rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; background: var(--primary-100); color: var(--primary-600); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="map-pin" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h2 style="font-size: 1.5rem; margin: 0;">Suggest a New Roadmap</h2>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Have a detailed plan for a skill or exam we don't cover? Submit your proposal below and our curation team will review it.</p>
+                
+                <form id="suggestRoadmapForm" onsubmit="event.preventDefault(); alert('Thanks for the suggestion! Our team will review it.'); this.reset();">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="roadmapName" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Roadmap Subject / Name</label>
+                        <input type="text" id="roadmapName" required placeholder="e.g. Advanced Rust Programming" style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-color); border-radius: 0.5rem;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="roadmapCategory" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Category</label>
+                        <select id="roadmapCategory" required style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-color); border-radius: 0.5rem;">
+                            <option value="" disabled selected>Select...</option>
+                            <option value="Tech Skills">Tech Skills</option>
+                            <option value="Exam Prep">Exam Prep</option>
+                            <option value="Creative Skills">Creative Skills</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="roadmapOutline" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Brief Outline</label>
+                        <textarea id="roadmapOutline" required placeholder="What are the main phases or topics?" rows="4" style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-color); border-radius: 0.5rem; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit Proposal</button>
+                </form>
+            </div>
+
+            <!-- Improve Existing -->
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 1.5rem; padding: 2.5rem; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; background: #dcfce7; color: #166534; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="refresh-cw" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h2 style="font-size: 1.5rem; margin: 0;">Suggest Better Resources</h2>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+                    Found a broken link or know a better YouTube tutorial for an existing roadmap node? You can submit resource updates directly through our GitHub repository.
+                </p>
+                <ol style="color: var(--text-muted); padding-left: 1.5rem; line-height: 1.6; margin-bottom: 2rem;">
+                    <li>Find the roadmap JSON file in the <code style="background: var(--bg-light); padding: 0.2rem 0.4rem; border-radius: 0.25rem;">/data/roadmaps</code> directory.</li>
+                    <li>Update the resource links array for the specific node.</li>
+                    <li>Submit a Pull Request with a brief explanation.</li>
+                </ol>
+                <a href="#" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="github" class="sm-icon"></i> Open GitHub Repo
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
