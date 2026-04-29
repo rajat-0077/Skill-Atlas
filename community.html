@@ -3,16 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community | Pathly</title>
+    <title>Community — Skill Atlas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="community-dark.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="community-dark">
-    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a><nav class="nav-links"><a href="roadmaps.html">Roadmaps</a><a href="dashboard.html">Dashboard</a></nav></div></header>
-    <main class="container py-8"><h1>Community Feed</h1><div id="communityFeed" class="feed-list"></div></main>
+<body class="bg-dark">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link active">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions"></div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="comm-container pt-navbar">
+        <!-- Sidebar Navigation -->
+        <aside class="left-sidebar">
+            <div class="user-preview-card" id="userPreview">
+                <div class="u-cover"></div>
+                <div class="u-info">
+                    <div class="u-avatar">?</div>
+                    <div class="u-name">Welcome!</div>
+                    <div class="u-meta">Sign in to join the talk</div>
+                </div>
+                <div class="u-stats">
+                    <div class="u-stat"><span>0</span><span>Posts</span></div>
+                    <div class="u-stat"><span>0</span><span>Karma</span></div>
+                </div>
+            </div>
+
+            <button class="btn-amber" id="openNewPostBtn">
+                <i data-lucide="plus"></i> Start a Discussion
+            </button>
+
+            <div class="sidebar-menu">
+                <h3 class="widget-title">Categories</h3>
+                <button class="cat-link active" data-cat="All">🌎 All Discussions</button>
+                <button class="cat-link" data-cat="JEE / NEET / UPSC">📚 JEE / NEET / UPSC</button>
+                <button class="cat-link" data-cat="Tech Skills">💻 Tech Skills</button>
+                <button class="cat-link" data-cat="Creative Skills">🎨 Creative Skills</button>
+                <button class="cat-link" data-cat="Business & Money">💰 Business & Money</button>
+                <button class="cat-link" data-cat="Study Tips">🎯 Study Tips</button>
+                <button class="cat-link" data-cat="Success Stories">🎉 Success Stories</button>
+                <button class="cat-link" data-cat="Ask Anything">❓ Ask Anything</button>
+            </div>
+
+            <h3 class="widget-title">🏆 Top Contributors</h3>
+            <div class="leaderboard-list">
+                <div class="leader-item">
+                    <div class="leader-avatar">P</div>
+                    <div class="leader-info">
+                        <span class="leader-name">Priya K.</span>
+                        <span class="leader-score">142 pts</span>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar" style="background: rgba(255,255,255,0.1); color: #fff;">A</div>
+                    <div class="leader-info">
+                        <span class="leader-name">Aryan D.</span>
+                        <span class="leader-score">98 pts</span>
+                    </div>
+                </div>
+                <div class="leader-item">
+                    <div class="leader-avatar" style="background: rgba(255,255,255,0.1); color: #fff;">S</div>
+                    <div class="leader-info">
+                        <span class="leader-name">Sneha R.</span>
+                        <span class="leader-score">76 pts</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Feed -->
+        <section class="main-feed">
+            <div class="feed-header">
+                <div class="sort-tabs" id="sortTabs">
+                    <button class="sort-tab active" data-sort="latest">Latest</button>
+                    <button class="sort-tab" data-sort="top">Top Rated</button>
+                    <button class="sort-tab" data-sort="replied">Most Replied</button>
+                    <button class="sort-tab" data-sort="unanswered">Unanswered</button>
+                </div>
+                <div class="feed-search">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" placeholder="Search posts...">
+                </div>
+            </div>
+
+            <div class="feed-list" id="communityFeed">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="side-card">
+                <h3 class="side-card-title"><i data-lucide="megaphone" style="color:#f59e0b;"></i> Community Rules</h3>
+                <ul class="rules-list">
+                    <li><i data-lucide="check-circle-2"></i> Be kind and helpful</li>
+                    <li><i data-lucide="check-circle-2"></i> No spam or self-promotion</li>
+                    <li><i data-lucide="check-circle-2"></i> Share genuine experiences</li>
+                    <li><i data-lucide="check-circle-2"></i> Help others like you were helped</li>
+                </ul>
+            </div>
+
+            <div class="side-card">
+                <h3 class="side-card-title"><i data-lucide="trending-up" style="color:#f59e0b;"></i> Trending Topics</h3>
+                <div class="trending-tags">
+                    <a href="#" class="trend-tag">#OrganicChemistry</a>
+                    <a href="#" class="trend-tag">#FigmaUpdates</a>
+                    <a href="#" class="trend-tag">#JEE2026</a>
+                    <a href="#" class="trend-tag">#UpworkTips</a>
+                    <a href="#" class="trend-tag">#ReactJS</a>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3 class="side-card-title"><i data-lucide="bar-chart-2" style="color:#f59e0b;"></i> Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="num">8.4k</span>
+                        <span class="lbl">Members</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="num">142</span>
+                        <span class="lbl">Posts this week</span>
+                    </div>
+                    <div class="stat-box" style="grid-column: span 2; margin-top: 8px;">
+                        <span class="num" style="color: #10b981;">1,204</span>
+                        <span class="lbl">Questions Answered</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Mobile Tab Bar -->
+    <nav class="mobile-tab-bar">
+        <div class="tabs">
+            <a href="#" class="tab-item active"><i data-lucide="home"></i> Feed</a>
+            <a href="#" class="tab-item"><i data-lucide="hash"></i> Topics</a>
+            <a href="#" class="tab-item" id="mobilePostBtn"><i data-lucide="plus-circle" style="color:#f59e0b;"></i> Post</a>
+            <a href="#" class="tab-item"><i data-lucide="bell"></i> Alerts</a>
+        </div>
+    </nav>
+
+    <!-- New Post Modal -->
+    <div class="comm-modal-overlay" id="newPostModal">
+        <div class="comm-modal">
+            <div class="modal-header">
+                <h2>Start a Discussion</h2>
+                <button class="btn-close" id="closePostModalBtn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <form id="newPostForm">
+                <div class="form-group">
+                    <input type="text" id="postTitle" class="large-input" required placeholder="What's on your mind?">
+                </div>
+                
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:8px; font-size:0.85rem; color:#a1a1aa;">Category</label>
+                    <div class="cat-selector" id="formCatSelector">
+                        <button type="button" class="cat-pill active" data-val="Ask Anything">Ask Anything</button>
+                        <button type="button" class="cat-pill" data-val="JEE / NEET / UPSC">JEE/NEET</button>
+                        <button type="button" class="cat-pill" data-val="Tech Skills">Tech</button>
+                        <button type="button" class="cat-pill" data-val="Creative Skills">Creative</button>
+                        <button type="button" class="cat-pill" data-val="Success Stories">Success Story</button>
+                    </div>
+                    <input type="hidden" id="postCategory" value="Ask Anything">
+                </div>
+
+                <div class="form-group" style="position:relative;">
+                    <textarea id="postBody" class="body-textarea" required placeholder="Share your thoughts, ask for advice, or tell a story..."></textarea>
+                    <span id="charCount" style="position:absolute; bottom:12px; right:16px; font-size:0.75rem; color:#71717a;">0</span>
+                </div>
+                
+                <div class="form-footer">
+                    <label class="toggle-anon">
+                        <input type="checkbox" id="anonToggle"> Post anonymously 👻
+                    </label>
+                    <button type="submit" class="btn-amber" style="width:auto; margin-bottom:0; padding:10px 24px;">
+                        Post to Community 🚀
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="auth.js"></script>
+    <script src="script.js"></script>
     <script src="community.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

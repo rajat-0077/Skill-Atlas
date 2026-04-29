@@ -3,13 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes | Pathly</title>
+    <title>Community Notes — Skill Atlas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="notes-dark.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="notes-dark">
-    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a></div></header>
-    <main class="container py-8"><h1>Study Notes</h1><div id="notesGrid" class="roadmap-grid"></div></main>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link active" style="color:#8b5cf6;">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions"></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <section class="notes-hero">
+        <div class="notes-hero-blob notes-hero-blob-1"></div>
+        <div class="notes-hero-blob notes-hero-blob-2"></div>
+        <h1>Community Notes</h1>
+        <p class="sub">Free notes, PYQs and resources shared by students like you</p>
+        <div class="notes-hero-actions">
+            <button class="btn-upload" id="openUploadBtn">📤 Upload Notes</button>
+            <button class="btn-search-toggle" id="searchToggleBtn">🔍 Search Notes</button>
+        </div>
+        <div class="notes-search-bar" id="searchBar">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search for 'Wave Optics', 'Figma'...">
+        </div>
+        <p class="notes-counter">📚 <span id="noteCount">0</span> notes shared by <span id="studentCount">0</span> students</p>
+    </section>
+
+    <!-- Filters -->
+    <div class="notes-filters">
+        <div class="filter-row" id="categoryFilters">
+            <button class="filter-pill active" data-filter="All">All</button>
+            <button class="filter-pill" data-filter="JEE">JEE</button>
+            <button class="filter-pill" data-filter="NEET">NEET</button>
+            <button class="filter-pill" data-filter="UPSC">UPSC</button>
+            <button class="filter-pill" data-filter="GATE">GATE</button>
+            <button class="filter-pill" data-filter="UI/UX">UI/UX</button>
+            <button class="filter-pill" data-filter="Web Dev">Web Dev</button>
+            <button class="filter-pill" data-filter="Marketing">Marketing</button>
+            <button class="filter-pill" data-filter="Other">Other</button>
+        </div>
+        <div class="filter-row" id="sortFilters">
+            <button class="sort-pill active" data-sort="downloads">Most Downloaded</button>
+            <button class="sort-pill" data-sort="rating">Top Rated</button>
+            <button class="sort-pill" data-sort="newest">Newest</button>
+        </div>
+    </div>
+
+    <!-- Notes Grid -->
+    <div class="notes-grid" id="notesGrid">
+        <!-- Rendered by JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="notes-empty" id="emptyState">
+        <div class="empty-icon">📭</div>
+        <h3>No notes here yet</h3>
+        <p>Be the first to share notes for this topic!</p>
+        <button class="btn-upload" onclick="document.getElementById('openUploadBtn').click()">Upload Now →</button>
+    </div>
+
+    <!-- Stats Bar -->
+    <section class="notes-stats-bar">
+        <div class="notes-stats-inner">
+            <div class="stat-block">
+                <span class="stat-num" id="statNotes">0</span>
+                <span class="stat-label">📚 Total Notes Shared</span>
+            </div>
+            <div class="stat-block">
+                <span class="stat-num" id="statDownloads">0</span>
+                <span class="stat-label">📥 Total Downloads</span>
+            </div>
+            <div class="stat-block">
+                <span class="stat-num" id="statRating">0</span>
+                <span class="stat-label">⭐ Average Rating</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Modal -->
+    <div class="preview-overlay" id="previewOverlay">
+        <div class="preview-modal" id="previewModal">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+
+    <!-- Upload Panel Overlay -->
+    <div class="upload-overlay" id="uploadOverlay"></div>
+
+    <!-- Upload Side Panel -->
+    <div class="upload-panel" id="uploadPanel">
+        <div id="uploadFormContainer">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <h2>Upload Notes</h2>
+                <button class="preview-close" id="closeUploadBtn"><i data-lucide="x" style="width:18px;height:18px;"></i></button>
+            </div>
+            <p class="panel-sub">Share your knowledge with students across India</p>
+
+            <form id="uploadNoteForm">
+                <label for="noteTitle">Note Title</label>
+                <input type="text" id="noteTitle" required placeholder="e.g. Complete Mechanics Notes">
+
+                <label for="noteDesc">Description</label>
+                <textarea id="noteDesc" required placeholder="What does it cover?" rows="3"></textarea>
+
+                <label for="noteCategory">Category</label>
+                <select id="noteCategory" required>
+                    <option value="" disabled selected>Select category...</option>
+                    <option value="Exam Prep">Exam Prep</option>
+                    <option value="Tech Skills">Tech Skills</option>
+                    <option value="Creative Skills">Creative Skills</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="noteTag">Exam / Skill Tag</label>
+                <input type="text" id="noteTag" required placeholder="e.g. JEE, NEET, UI/UX, Web Dev">
+
+                <label for="noteSubject">Subject</label>
+                <input type="text" id="noteSubject" required placeholder="e.g. Physics, Design Systems">
+
+                <label for="noteLink">Google Drive Link</label>
+                <input type="url" id="noteLink" placeholder="https://drive.google.com/file/d/...">
+                <p class="helper">Upload to Drive → Share → Anyone with link → Copy link → Paste here</p>
+
+                <label for="notePages">Page Count</label>
+                <input type="number" id="notePages" min="1" placeholder="e.g. 24">
+
+                <button type="submit" class="btn-submit-note">Share with Community 🚀</button>
+            </form>
+        </div>
+        <div class="upload-success" id="uploadSuccess">
+            <div class="emoji">🎉</div>
+            <h3>You're amazing!</h3>
+            <p>Your notes are now helping students across India!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i data-lucide="map" class="logo-icon"></i>
+                        Skill Atlas
+                    </a>
+                    <p>Your clear path to any skill or exam.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">Contribute on GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Skill Atlas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script src="notes.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
