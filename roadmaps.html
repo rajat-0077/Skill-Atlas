@@ -3,15 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Roadmaps | Pathly</title>
+    <title>Explore Roadmaps — Skill Atlas</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="browse-roadmaps.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
-    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a></div></header>
-    <main class="container py-8"><h1>Learning Roadmaps</h1><div id="roadmapsList" class="roadmap-grid"></div></main>
+<body class="bg-light">
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link active">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions">
+                    <!-- Auth actions injected here -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container pt-navbar">
+        <div class="roadmaps-header">
+            <div>
+                <h1 class="page-title">Learning Roadmaps</h1>
+                <p class="section-subtitle">Curated paths to master any skill or prepare for exams.</p>
+            </div>
+            
+            <div class="search-box-large">
+                <i data-lucide="search"></i>
+                <input type="text" id="roadmapSearch" placeholder="Search roadmaps...">
+            </div>
+        </div>
+
+        <div class="roadmaps-layout">
+            <aside class="sidebar">
+                <h2 class="sidebar-title">Categories</h2>
+                <ul class="filter-list" id="categoryFilters">
+                    <li><button class="filter-btn active" data-category="all">All Roadmaps</button></li>
+                    <li><button class="filter-btn" data-category="tech">Tech Skills</button></li>
+                    <li><button class="filter-btn" data-category="exams">Exam Prep</button></li>
+                    <li><button class="filter-btn" data-category="creative">Creative</button></li>
+                    <li><button class="filter-btn" data-category="business">Business</button></li>
+                </ul>
+            </aside>
+
+            <div class="roadmaps-content">
+                <div class="roadmap-grid" id="roadmapGrid">
+                    <!-- Roadmaps injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script src="auth.js"></script>
     <script src="roadmaps.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
