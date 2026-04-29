@@ -1,0 +1,3 @@
+.profile-dark { background: #0f0f0f; }
+.profile-header { background: linear-gradient(to bottom, #1e1b4b, #0f0f0f); padding: 4rem 2rem; border-radius: 1.5rem; margin-top: 2rem; }
+.avatar-large { width: 120px; height: 120px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; border: 4px solid #0f0f0f; margin-bottom: 1.5rem; }
