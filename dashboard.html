@@ -10,17 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="dashboard-dark">
-    <header class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a>
-            <div class="nav-actions"></div>
-        </div>
-    </header>
-    <main class="container py-8">
-        <h1 id="greeting">Welcome Back!</h1>
-        <div class="stats-row"></div>
-        <div class="active-roadmaps"></div>
-    </main>
+    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a><nav class="nav-links"><a href="roadmaps.html">Roadmaps</a><a href="community.html">Community</a></nav></div></header>
+    <main class="container py-8"><h1 id="dashGreeting">Dashboard</h1><div id="dashContent" class="dash-grid"></div></main>
     <script src="auth.js"></script>
     <script src="dashboard.js"></script>
 </body>
