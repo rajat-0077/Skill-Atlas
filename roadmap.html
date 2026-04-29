@@ -1,18 +1,282 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="roadmap-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roadmap | Pathly</title>
+    <title>UI/UX Design Roadmap 2025 | Skill Atlas</title>
+    <meta name="description" content="A comprehensive, interactive visual roadmap to learn UI/UX Design from scratch in 2025. Track your progress for free on Skill Atlas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="neon-roadmap.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="dark-theme">
-    <header class="navbar"><div class="container nav-container"><a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a></div></header>
-    <main class="container py-8"><div id="roadmapCanvas" class="roadmap-canvas"></div></main>
+<body class="roadmap-dark">
+
+    <!-- Sticky Progress Header -->
+    <header class="sticky-header" id="stickyHeader">
+        <div class="header-top">
+            <div class="roadmap-title">
+                <a href="roadmaps.html" class="back-btn"><i data-lucide="arrow-left"></i></a>
+                UI/UX Design Roadmap
+            </div>
+            <div class="progress-stats" id="progressStats">0 of 9 nodes complete</div>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="topProgressFill"></div>
+        </div>
+    </header>
+
+    <main class="roadmap-container relative" id="roadmapContainer">
+        <!-- SVG Trail -->
+        <div class="trail-svg-container">
+            <svg id="trailSvg" width="100%" height="100%" preserveAspectRatio="none">
+                <path id="trailPathBg" stroke="rgba(255,255,255,0.05)" stroke-width="4" stroke-dasharray="12 12" fill="none" stroke-linecap="round" />
+                <path id="trailPathActive" stroke="#3b82f6" stroke-width="4" stroke-dasharray="12 12" fill="none" stroke-linecap="round" />
+            </svg>
+        </div>
+
+        <!-- Phase 1: Foundations -->
+        <div class="phase-header" style="--phase-color: var(--phase1); --phase-rgb: var(--phase1-rgb);">
+            <h2>Phase 01 — Foundations</h2>
+            <div class="phase-subtitle">3 topics · Est. 13 hours</div>
+            <div class="phase-divider"></div>
+        </div>
+
+        <div class="node-wrapper zig-0">
+            <div class="node-card" data-id="node-1" data-phase="1" data-title="Design Thinking" data-time="~4 hours" data-desc="Learn the human-centered approach to problem solving. Understand empathizing with users, defining problems, ideating, prototyping, and testing." style="--node-color: var(--phase1); --node-rgb: var(--phase1-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 01</span>
+                    <div class="node-icon"><i data-lucide="brain-circuit"></i></div>
+                </div>
+                <h3 class="node-title">Design Thinking</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 4 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-1">
+            <div class="node-card locked" data-id="node-2" data-phase="1" data-title="Visual Design Basics" data-time="~6 hours" data-desc="Master the fundamentals of visual design including typography, color theory, spacing, and layout principles." style="--node-color: var(--phase1); --node-rgb: var(--phase1-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 02</span>
+                    <div class="node-icon"><i data-lucide="palette"></i></div>
+                </div>
+                <h3 class="node-title">Visual Design Basics</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 6 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-2">
+            <div class="node-card locked" data-id="node-3" data-phase="1" data-title="Figma Setup" data-time="~3 hours" data-desc="Get comfortable with the industry-standard design tool. Learn about frames, shapes, auto-layout basics, and components." style="--node-color: var(--phase1); --node-rgb: var(--phase1-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 03</span>
+                    <div class="node-icon"><i data-lucide="figma"></i></div>
+                </div>
+                <h3 class="node-title">Figma Setup</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 3 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <!-- Phase 2: Core Skills -->
+        <div class="phase-header" style="--phase-color: var(--phase2); --phase-rgb: var(--phase2-rgb);">
+            <h2>Phase 02 — Core Skills</h2>
+            <div class="phase-subtitle">3 topics · Est. 15 hours</div>
+            <div class="phase-divider"></div>
+        </div>
+
+        <div class="node-wrapper zig-3">
+            <div class="node-card locked" data-id="node-4" data-phase="2" data-title="Wireframing" data-time="~5 hours" data-desc="Learn how to create low-fidelity wireframes to outline the basic structure and functionality of digital products without worrying about aesthetics." style="--node-color: var(--phase2); --node-rgb: var(--phase2-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 04</span>
+                    <div class="node-icon"><i data-lucide="layout-template"></i></div>
+                </div>
+                <h3 class="node-title">Wireframing</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 5 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-4">
+            <div class="node-card locked" data-id="node-5" data-phase="2" data-title="Prototyping" data-time="~6 hours" data-desc="Bring your designs to life. Create interactive prototypes using Figma's advanced prototyping features including smart animate and interactive components." style="--node-color: var(--phase2); --node-rgb: var(--phase2-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 05</span>
+                    <div class="node-icon"><i data-lucide="mouse-pointer-click"></i></div>
+                </div>
+                <h3 class="node-title">Prototyping</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 6 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-5">
+            <div class="node-card locked" data-id="node-6" data-phase="2" data-title="User Testing" data-time="~4 hours" data-desc="Validate your designs with real users. Learn how to conduct usability tests, ask non-leading questions, and analyze feedback." style="--node-color: var(--phase2); --node-rgb: var(--phase2-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 06</span>
+                    <div class="node-icon"><i data-lucide="users"></i></div>
+                </div>
+                <h3 class="node-title">User Testing</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 4 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <!-- Phase 3: Portfolio & Jobs -->
+        <div class="phase-header" style="--phase-color: var(--phase3); --phase-rgb: var(--phase3-rgb);">
+            <h2>Phase 03 — Portfolio & Jobs</h2>
+            <div class="phase-subtitle">3 topics · Est. 13+ hours</div>
+            <div class="phase-divider"></div>
+        </div>
+
+        <div class="node-wrapper zig-6">
+            <div class="node-card locked" data-id="node-7" data-phase="3" data-title="Build Case Studies" data-time="~10 hours" data-desc="Document your design process. Learn how to write compelling case studies detailing the problem, your process, iterations, and final solution." style="--node-color: var(--phase3); --node-rgb: var(--phase3-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 07</span>
+                    <div class="node-icon"><i data-lucide="file-text"></i></div>
+                </div>
+                <h3 class="node-title">Build Case Studies</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 10 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-7">
+            <div class="node-card locked" data-id="node-8" data-phase="3" data-title="Behance Profile" data-time="~3 hours" data-desc="Set up your professional presence online. Upload your case studies to platforms like Behance or your own personal portfolio website." style="--node-color: var(--phase3); --node-rgb: var(--phase3-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 08</span>
+                    <div class="node-icon"><i data-lucide="globe"></i></div>
+                </div>
+                <h3 class="node-title">Behance Profile</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> 3 hours</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+        <div class="node-wrapper zig-8">
+            <div class="node-card locked" data-id="node-9" data-phase="3" data-title="Get First Client" data-time="~Ongoing" data-desc="Learn strategies for freelance platforms, networking, and outreach to secure your first real-world design gig." style="--node-color: var(--phase3); --node-rgb: var(--phase3-rgb);">
+                <div class="node-header">
+                    <span class="node-number">⚡ 09</span>
+                    <div class="node-icon"><i data-lucide="briefcase"></i></div>
+                </div>
+                <h3 class="node-title">Get First Client</h3>
+                <div class="node-card-divider"></div>
+                <div class="node-meta">
+                    <span><i data-lucide="clock" style="width:14px"></i> Ongoing</span> 
+                    <span><i data-lucide="book-open" style="width:14px"></i> Free</span>
+                </div>
+                <button class="open-btn">Open →</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Side Panel Overlay -->
+    <div class="side-panel-overlay" id="panelOverlay"></div>
+
+    <!-- Right/Bottom Side Panel -->
+    <aside class="side-panel" id="sidePanel">
+        <div class="panel-header">
+            <h3 class="panel-title" id="panelTitle">Topic Name</h3>
+            <button class="close-panel-btn" id="closePanelBtn">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        
+        <div class="panel-meta">
+            <span class="estimated-time"><i data-lucide="clock" style="width:16px"></i> <span id="panelTime">~3 hours</span></span>
+        </div>
+        
+        <div class="panel-section">
+            <h4>Description</h4>
+            <p id="panelDesc" class="panel-desc">Topic description goes here.</p>
+        </div>
+        
+        <div class="panel-section">
+            <h4>Free Resources</h4>
+            <div class="resources-list">
+                <a href="#" class="resource-pill">
+                    <div class="pill-icon"><i data-lucide="youtube"></i></div>
+                    <div class="pill-content">
+                        <span class="pill-title">Crash Course Video</span>
+                        <span class="pill-meta">YouTube · 45 mins</span>
+                    </div>
+                </a>
+                <a href="#" class="resource-pill">
+                    <div class="pill-icon"><i data-lucide="file-text"></i></div>
+                    <div class="pill-content">
+                        <span class="pill-title">Comprehensive Guide</span>
+                        <span class="pill-meta">Article · 15 mins read</span>
+                    </div>
+                </a>
+                <a href="#" class="resource-pill sponsored">
+                    <div class="pill-icon"><i data-lucide="star"></i></div>
+                    <div class="pill-content">
+                        <span class="pill-title">Masterclass Bootcamp <span class="sponsored-tag">Sponsored</span></span>
+                        <span class="pill-meta">Premium Course</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="panel-footer">
+            <button class="mark-complete-btn" id="markCompleteBtn">
+                <i data-lucide="check" style="width:20px"></i> 
+                <span>Mark Complete ✓</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Celebration Modal -->
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="celebration-icon">🎉</div>
+        <h3 class="celebration-title">You did it!</h3>
+        <p class="celebration-desc">You completed the UI/UX Design Roadmap. That's a huge step forward in your career.</p>
+        <div class="celebration-actions">
+            <button class="btn-share"><i data-lucide="twitter"></i> Share on Twitter</button>
+            <button class="btn-next" onclick="document.getElementById('celebrationModal').classList.remove('active')">Explore Next Roadmap</button>
+        </div>
+    </div>
+
     <script src="auth.js"></script>
     <script src="roadmap.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

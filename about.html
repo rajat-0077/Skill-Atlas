@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Skill Atlas</title>
-    <meta name="description" content="Learn more about Skill Atlas and our mission to provide free, high-quality learning paths for everyone.">
+    <title>About Us | Skill Atlas</title>
+    <meta name="description" content="Learn about Skill Atlas's mission to provide free, community-driven visual roadmaps for every skill and exam.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,35 +39,58 @@
     </header>
 
     <!-- Main Content -->
-    <main class="page-content pt-navbar container" style="padding-top: 4rem; padding-bottom: 6rem;">
+    <main class="page-content pt-navbar container" style="max-width: 800px; padding-top: 6rem; padding-bottom: 6rem;">
         
         <div style="text-align: center; margin-bottom: 4rem;">
-            <h1 class="page-title" style="margin-bottom: 1rem;">Our Mission</h1>
-            <p class="section-subtitle" style="max-width: 700px; margin: 0 auto;">We believe that high-quality education should be free and accessible to everyone. Skill Atlas provides clear, structured paths to master any skill or prepare for any exam without the noise.</p>
+            <div class="hero-badge" style="margin: 0 auto 1.5rem;">OUR MISSION</div>
+            <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 1.5rem;">Making Learning Clear and Accessible for Everyone</h1>
+            <p class="hero-subtitle" style="max-width: 600px; margin: 0 auto;">Skill Atlas is a free, community-driven platform designed to eliminate confusion and help you navigate the overwhelming sea of online resources.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-bottom: 5rem;">
-            <div>
-                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">Why Skill Atlas?</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
-                    The internet is full of great resources, but finding the right order to learn things is often the hardest part. Students spend more time searching for what to learn next than actually learning.
-                </p>
-                <p style="color: var(--text-muted); line-height: 1.6;">
-                    Skill Atlas solves this by providing visual, step-by-step roadmaps curated by experts and the community. We point you to the best free tutorials, documentation, and practice problems at each step.
-                </p>
-            </div>
-            <div>
-                <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">The "Open" Philosophy</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
-                    Everything on Skill Atlas is open-source and community-driven. Our roadmaps are living documents that evolve as technology and exam patterns change.
-                </p>
-                <p style="color: var(--text-muted); line-height: 1.6;">
-                    If you see something that can be improved, you can contribute. If you know a better resource for a specific topic, you can suggest it. We are stronger together.
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: 1.5rem; padding: 3rem; box-shadow: var(--shadow-sm); margin-bottom: 4rem;">
+            
+            <div style="margin-bottom: 3rem;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.75rem; background: var(--primary-100); color: var(--primary-600); display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="globe" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h2 style="font-size: 1.5rem; margin: 0;">What is Skill Atlas?</h2>
+                </div>
+                <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.125rem;">
+                    Whether you are preparing for a competitive exam like JEE or UPSC, or trying to pick up a new tech or creative skill, knowing <em>where to start</em> is often the hardest part. Skill Atlas provides curated, step-by-step visual roadmaps that break down complex subjects into digestible modules.
                 </p>
             </div>
+
+            <div style="margin-bottom: 3rem;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.75rem; background: #dcfce7; color: #166534; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h2 style="font-size: 1.5rem; margin: 0;">100% Free & Community Driven</h2>
+                </div>
+                <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.125rem;">
+                    Education should not be locked behind a paywall. Skill Atlas is completely free to use. Our roadmaps, notes, and community discussions are powered by students, educators, and professionals who volunteer their time to share their knowledge.
+                </p>
+            </div>
+
+            <div>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.75rem; background: #f3f4f6; color: #1f2937; display: flex; align-items: center; justify-content: center;">
+                        <i data-lucide="github" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h2 style="font-size: 1.5rem; margin: 0;">Open Source</h2>
+                </div>
+                <p style="color: var(--text-muted); line-height: 1.7; font-size: 1.125rem; margin-bottom: 1.5rem;">
+                    Skill Atlas believes in transparency. The entire platform is open source on GitHub. We welcome developers to help us build new features and improve the user experience.
+                </p>
+                <a href="#" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="github" class="sm-icon"></i> View Source on GitHub
+                </a>
+            </div>
+
         </div>
 
-        <div style="background: white; border: 1px solid var(--border-color); border-radius: 2rem; padding: 4rem 2rem; text-align: center;">
+        <div style="text-align: center; background: var(--bg-light); border: 2px dashed var(--primary-300); border-radius: 1.5rem; padding: 4rem 2rem;">
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Help Us Grow</h2>
             <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; font-size: 1.125rem;">
                 Are you an expert in a field? We are always looking for new roadmaps to add to our collection. Help the next generation of learners.
