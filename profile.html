@@ -3,24 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | Pathly</title>
+    <title>Profile | Skill Atlas</title>
+    <meta name="description" content="View and edit your Skill Atlas profile, goals, and learning progress.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="profile-dark.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="profile-dark">
+    <!-- Navbar -->
     <header class="navbar">
         <div class="container nav-container">
-            <a href="index.html" class="logo"><i data-lucide="map"></i> Pathly</a>
-            <div class="nav-actions"></div>
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Skill Atlas
+            </a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                
+                <div class="nav-actions">
+                    <button class="nav-bell" id="notifBell" title="Notifications">
+                        <i data-lucide="bell"></i>
+                    </button>
+                </div>
+            </nav>
         </div>
     </header>
-    <main class="container py-8">
-        <div class="profile-header"></div>
-        <div class="profile-stats"></div>
+
+    <main class="profile-layout">
+        <!-- Sidebar -->
+        <aside class="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <button class="avatar-edit-btn" title="Change Avatar">
+                        <i data-lucide="camera"></i>
+                    </button>
+                </div>
+                <h2 class="profile-name" id="profileName">Loading...</h2>
+                <p class="profile-handle" id="profileHandle">@user</p>
+                <div class="profile-badges">
+                    <span class="badge badge-primary">Level 12 Explorer</span>
+                </div>
+                
+                <div class="profile-stats-mini">
+                    <div class="mini-stat">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Roadmaps</span>
+                    </div>
+                    <div class="mini-stat">
+                        <span class="stat-value">4.8k</span>
+                        <span class="stat-label">Points</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-menu">
+                    <a href="#" class="menu-item active"><i data-lucide="user"></i> Personal Info</a>
+                    <a href="#" class="menu-item"><i data-lucide="settings"></i> Account Settings</a>
+                    <a href="#" class="menu-item"><i data-lucide="shield"></i> Privacy & Security</a>
+                    <a href="#" class="menu-item" onclick="SkillAtlasAuth.logout()"><i data-lucide="log-out"></i> Logout</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="profile-main">
+            <div class="section-header">
+                <h1 class="section-title">Personal Information</h1>
+                <button class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
+            </div>
+
+            <div class="settings-grid">
+                <!-- Basic Info -->
+                <div class="settings-card">
+                    <h3 class="card-title">Basic Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="editName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Public Handle</label>
+                            <div class="input-prefix-wrapper">
+                                <span class="input-prefix">@</span>
+                                <input type="text" id="editHandle" placeholder="username">
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Short Bio</label>
+                            <textarea id="editBio" rows="3" placeholder="Tell the community about yourself..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goals & Persona -->
+                <div class="settings-card">
+                    <h3 class="card-title">Goals & Identity</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Primary Role</label>
+                            <select id="editRole">
+                                <option value="student">School Student</option>
+                                <option value="college">College Student</option>
+                                <option value="aspirant">Competitive Aspirant</option>
+                                <option value="professional">Professional</option>
+                                <option value="switcher">Career Switcher</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="editLocation" placeholder="City, Country">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Learning Goals</label>
+                            <div class="goal-pills" id="goalPills">
+                                <!-- Goals will be mapped here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="settings-card danger">
+                    <h3 class="card-title">Danger Zone</h3>
+                    <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                    <button class="btn btn-outline danger">Delete Account</button>
+                </div>
+            </div>
+        </section>
     </main>
+
     <script src="auth.js"></script>
     <script src="profile.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

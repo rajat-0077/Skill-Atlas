@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Roadmaps — Skill Atlas</title>
+    <title>Browse Roadmaps | Skill Atlas</title>
+    <meta name="description" content="Explore step-by-step visual roadmaps for tech skills, competitive exams, and more. All free on Skill Atlas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="browse-roadmaps.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,7 +22,7 @@
                 Skill Atlas
             </a>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                 <i data-lucide="menu"></i>
             </button>
 
@@ -29,48 +33,79 @@
                 <a href="dashboard.html" class="nav-link">Dashboard</a>
                 
                 <div class="nav-actions">
-                    <!-- Auth actions injected here -->
+                    <!-- Populated by auth.js -->
                 </div>
             </nav>
         </div>
     </header>
 
-    <main class="container pt-navbar">
+    <!-- Main Content -->
+    <main class="page-content pt-navbar container">
         <div class="roadmaps-header">
-            <div>
-                <h1 class="page-title">Learning Roadmaps</h1>
-                <p class="section-subtitle">Curated paths to master any skill or prepare for exams.</p>
-            </div>
+            <h1 class="page-title">Explore Roadmaps</h1>
+            <p class="section-subtitle">Choose a path and start learning with curated free resources.</p>
             
-            <div class="search-box-large">
-                <i data-lucide="search"></i>
-                <input type="text" id="roadmapSearch" placeholder="Search roadmaps...">
-            </div>
-        </div>
-
-        <div class="roadmaps-layout">
-            <aside class="sidebar">
-                <h2 class="sidebar-title">Categories</h2>
-                <ul class="filter-list" id="categoryFilters">
-                    <li><button class="filter-btn active" data-category="all">All Roadmaps</button></li>
-                    <li><button class="filter-btn" data-category="tech">Tech Skills</button></li>
-                    <li><button class="filter-btn" data-category="exams">Exam Prep</button></li>
-                    <li><button class="filter-btn" data-category="creative">Creative</button></li>
-                    <li><button class="filter-btn" data-category="business">Business</button></li>
-                </ul>
-            </aside>
-
-            <div class="roadmaps-content">
-                <div class="roadmap-grid" id="roadmapGrid">
-                    <!-- Roadmaps injected here -->
+            <div class="search-filter-bar">
+                <div class="search-input-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="roadmapSearch" placeholder="Search roadmaps (e.g. React, UPSC, Design)...">
+                </div>
+                <div class="filter-dropdowns">
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="tech">Tech Skills</option>
+                        <option value="exam">Competitive Exams</option>
+                        <option value="business">Business</option>
+                        <option value="creative">Creative</option>
+                    </select>
                 </div>
             </div>
         </div>
+
+        <div class="roadmaps-grid" id="roadmapsGrid">
+            <!-- Roadmaps will be injected here by roadmaps.js -->
+            <div class="loading-state">
+                <i data-lucide="loader" class="spin"></i>
+                <p>Loading roadmaps...</p>
+            </div>
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <i data-lucide="search-x"></i>
+            <h3>No roadmaps found</h3>
+            <p>Try adjusting your search or filters.</p>
+            <button onclick="resetFilters()" class="btn btn-outline">Reset All Filters</button>
+        </div>
     </main>
+
+    <footer class="footer mt-12">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <i data-lucide="map" class="logo-icon"></i>
+                        Skill Atlas
+                    </a>
+                    <p>Making education clear and accessible for everyone.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="contribute.html">Contribute</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Skill Atlas. Built with ❤️ by the community.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="auth.js"></script>
     <script src="roadmaps.js"></script>
     <script src="script.js"></script>
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
