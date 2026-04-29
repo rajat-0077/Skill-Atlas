@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathly — Free Visual Roadmaps for Skills & Exams</title>
+    <meta name="description" content="Discover clear, community-driven visual roadmaps to help you master any tech skill, creative skill, or prepare for exams like JEE and UPSC for free.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i data-lucide="map" class="logo-icon"></i>
+                Pathly
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+            <nav class="nav-links" id="navLinks">
+                <a href="roadmaps.html" class="nav-link">Roadmaps</a>
+                <a href="notes.html" class="nav-link">Notes</a>
+                <a href="community.html" class="nav-link">Community</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <div class="nav-actions">
+                    <a href="signin.html" class="btn btn-ghost">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">New: AI Learning Paths 🚀</span>
+                <h1 class="hero-title">Stop being confused.<br><span class="text-gradient">Start making progress.</span></h1>
+                <p class="hero-subtitle">Your clear path to any skill or exam. Discover curated roadmaps built by experts.</p>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" placeholder="Search for 'Frontend Development', 'SAT Prep'..." class="search-input">
+                        <button class="btn btn-primary search-btn">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+    </section>
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Explore Categories</h2>
+            <div class="category-grid">
+                <a href="#" class="category-card"><div class="icon-wrapper bg-blue"><i data-lucide="laptop"></i></div><h3>Tech Skills</h3></a>
+                <a href="#" class="category-card"><div class="icon-wrapper bg-green"><i data-lucide="book"></i></div><h3>Exam Prep</h3></a>
+                <a href="#" class="category-card"><div class="icon-wrapper bg-pink"><i data-lucide="paintbrush"></i></div><h3>Creative Skills</h3></a>
+                <a href="#" class="category-card"><div class="icon-wrapper bg-orange"><i data-lucide="briefcase"></i></div><h3>Career & Jobs</h3></a>
+                <a href="#" class="category-card"><div class="icon-wrapper bg-purple"><i data-lucide="line-chart"></i></div><h3>Business & Money</h3></a>
+                <a href="#" class="category-card"><div class="icon-wrapper bg-red"><i data-lucide="video"></i></div><h3>Creator Economy</h3></a>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo"><i data-lucide="map" class="logo-icon"></i>Pathly</a>
+                    <p>Your clear path to any skill or exam.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="contribute.html">Contribute</a>
+                    <a href="https://github.com/rajat-0077/Skill-Atlas" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
