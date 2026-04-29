@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+.env
+.vercel
+*.log
+files_to_push.json
+format_files.py
+seo_update.py
