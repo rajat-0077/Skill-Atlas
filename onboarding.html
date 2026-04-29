@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Pathly 🚀</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="onboarding.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="onboarding-page">
+    <div id="onboardingContainer" class="onboarding-container">
+        <div class="onboarding-step active" id="step1">
+            <div class="step-content text-center">
+                <div class="welcome-icon">🎉</div>
+                <h1 class="step-title">Welcome to Pathly</h1>
+                <p class="step-subtitle">Let's set up your profile in under 2 minutes</p>
+                <button class="btn btn-primary btn-lg mt-8" onclick="nextStep(2)">Let's Go →</button>
+            </div>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+    <script src="onboarding.js"></script>
+</body>
+</html>
